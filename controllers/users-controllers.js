@@ -1,4 +1,5 @@
 const User = require('../models/user.js');
+const jwt = require('jsonwebtoken');
 
 const createUser = async (req, res, next) => {
     const createdUser = new User({
@@ -33,8 +34,28 @@ const createUser = async (req, res, next) => {
       res.json({message: 'Invalide credentials'});
     }
   
-    res.json({message: 'Logged in!'});
+    
+    let token;
+  try {
+    token = jwt.sign(
+      { userId: existingUser.id, email: existingUser.email },
+      'behamics123',
+      { expiresIn: '1h' }
+    );
+  } catch (err) {
+    res.json("Failed");
+    return next(error);
+  }
+
+  res.json({
+    userId: existingUser.id,
+    email: existingUser.email,
+    token: token
+  });
+
   };
+
+
 
 
   const getUsers = async (req , res , next) => {
@@ -61,6 +82,11 @@ const getUserById = async (req, res, next) => {
 
   res.json({ full_name:user.full_name,username:user.username, email: user.email });
 };
+
+
+
+
+
 
   exports.createUser = createUser;
   exports.login = login;

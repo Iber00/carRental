@@ -19,6 +19,8 @@
   "homepage": "https://github.com/Iber00/carRental#readme",
   "dependencies": {
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb-connection-string-url": "^3.0.2",
     "mongoose": "^8.10.1"
   }
 }

@@ -2,25 +2,32 @@ const express = require ('express');
 const bodyParser = require ('body-parser');
 const carsControllers = require('./controllers/cars-controllers');
 const userControllers = require('./controllers/users-controllers');
+const checkAuth = require('./middleware/check-auth');
 
 const mongoose = require('mongoose');
 const app = express();
 
 app.use(bodyParser.json());
 
-app.post('/car', carsControllers.createCar);
+app.post('/car', carsControllers.createCar); 
 app.get('/rental-cars',carsControllers.getCars);
 app.post('/register',userControllers.createUser);
 app.post('/login',userControllers.login);
+
+
+app.use(checkAuth);
+
 app.get('/my-profile/:uid',userControllers.getUserById);
 
 
-mongoose
-.connect('mongodb+srv://iber:12341234@cluster0.qu9d1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 
+
+  mongoose
+  .connect('mongodb://127.0.0.1:27017/carRent', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    app.listen(3000);
+    console.log("Connected to MongoDB locally!");
+    app.listen(3000, () => console.log("Server running on port 3000"));
   })
   .catch(err => {
-    console.log("Error ,can not connect to data base");
+    console.error("Error, cannot connect to database", err);
   });
