@@ -10,6 +10,7 @@ Below they API's are sorted from first to last based on exam requirments.
 
 1).Register API  
 // app.post('/register',userControllers.createUser);
+
  
 The Register API can be tested by sending POST request http://localhost:3000/register
 By populating full_name, email,username,password
@@ -90,8 +91,9 @@ Steps to hit the API
  
 And we will GET the full_name ,username,email of that user.
 If we try to hit the API without the token we will not get the response like in the example below.
- 
 
+
+IN THE ZIP FOLDER I WILL ADD THE WORD FILE WHERE ARE SHOWN DESCRIPTION WITH PICS
 
 
 
