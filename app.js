@@ -19,7 +19,8 @@ app.use(checkAuth);
 
 app.get('/my-profile/:uid',userControllers.getUserById);
 
-
+//import * as dotenv from 'dotenv';
+//dotenv.config();
 
 
   mongoose
